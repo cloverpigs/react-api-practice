@@ -27,8 +27,31 @@
         
         렌더링 과정에서 리액트는 이 엘리먼트를 실제 DOM 엘리먼트로 변환한다.
         <h1 id="greeting">hello world</h1>
+        
+        리액트 엘리먼트는 단지 리액트에게 DOM 엘리먼트를 구성하는 방법을 알려주즌 자바스크립트의 객체로
+        실제 DOM 객체가 아니다.
         */
         const greetingElement = React.createElement('h1', {id : 'greeting'}, 'hello world!');
+        const textElement = React.createElement('h3', {id : 'name'}, '안녕하세요. 홍길동입니다.')
+
+        /* ReactDOM.render() : 리액트 엘리먼트와 그 모든 자식 엘리먼트를 함께 랜더링 하기 위한 함수
+        첫 번째 인자 : 리액트 엘리먼트
+        두 번째 인자 : 랜더링이 일어날 대상 DOM 노드*/
+        // ReactDOM.render(
+        //     greetingElement,
+        //     document.getElementById('root')
+        // )
+
+        /* 16버전 이전의 엘리먼트는 한 엘리먼트만 랜더링이 가능했지만
+        이후 버전에서는 배열을 랜더링 할 수 도 있다. */
+        // ReactDOM.render(
+        //     [greetingElement, textElement],
+        //     document.getElementById('root')
+        // )
+
+        /* 18 버전 */
+        ReactDOM.createRoot(document.getElementById('root'))
+        .render([greetingElement, textElement]);
 
 
     </script>
