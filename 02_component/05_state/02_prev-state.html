@@ -60,11 +60,15 @@
                                     콜백함수로 첫번째인자는 이전 state 값, 두번째 인자로 props를 받는다.
                                     리턴 값 {}을 요약할때 그냥 쓰면 코드블록({})으로 인식해서 소괄호()로 감싸야 한다. */
                                 this.setState((prevState, props) => {
+                                    console.log(`number : ${prevState.number}`);
                                     return{
+                                        
                                         number : prevState.number + 1
+                                        
                                     };
+                                    
                                 }); 
-
+                            
                                 this.setState(prevState => ({number : prevState.number + 1}));
                                 
                             }

@@ -30,10 +30,36 @@
                 { id: 3, name : '이순신' }
             ]);
 
-            const nameList = names.map( item => <li key={item.id}>{item.name}</li>);
+            const [ inputText, setInputText ]  = useState('');
+            const [ nextId , setNextId ] = useState(4);
+
+            const onChangHandler = e => setInputText(e.target.value);
+            const onClickHandler = e => {
+                
+                const changedNames = names.concat({
+                    id : nextId,
+                    name : inputText
+                });
+
+                setNextId(nextId + 1);
+                setNames(changedNames);
+                setInputText('');
+            };
+            
+            const onRemove = id => {
+                /* filter 조건이 true인 값만 반환 false는 반환하지 않음 , id가 같지 않는값만 반환되어
+                선택한 id를 가진 값은 사라진다.*/
+                const changedNames = names.filter( item => item.id !== id );
+                setNames(changedNames);
+            };
+
+            const nameList = names.map( item => <li key={item.id} 
+                            onDoubleClick={ () => onRemove(item.id) }>{item.name}</li>);
 
             return (
-                <>
+                <>  
+                    <input value={ inputText } onChange={ onChangHandler }/>
+                    <button onClick={ onClickHandler }>추가</button>
                     <ul>{ nameList }</ul>
                 </>
             );
