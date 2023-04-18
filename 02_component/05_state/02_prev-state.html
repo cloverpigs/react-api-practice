@@ -18,9 +18,12 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        /* prevState
-        
-
+        /* prevState를 활용한 setState 함수 사용
+        this.setState를 사용할 시 상태가 변경 되고 리랜더링이 되어야 state 값 변경이
+        적용된다. 하나의 이벤트 핸들러에서 여러번 setState를 호출한다고 누적해서 갱신
+        되지 않는다. 이 때 state 객체 대신 함수를 인자로 전달하여 첫번째 인자 prevState,
+        두번째 인자 props를 활용할 수 있다. 만약 props가 필요하지 않은 상황이면 생략
+        가능하다.     
         */
 
         class Counter extends React.Component {
