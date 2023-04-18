@@ -46,15 +46,27 @@
                                     
                                 }
                             }
+                            value={ this.state.message }
+                            
                         />
+                            {/* value 값으로 message값을 가져와서 처리하는데 
+                            button에서 message초기화 시켜 값을 초기화 시킨다. 
+                            초기화 된 값으로 인해 input에서 value가 없어져
+                            placeholder의 값으로 나타난다.*/}
                         <button
                             onClick={ 
                                 () => {
                                     alert(this.state.message);
+                                    /* 메세지 상태 값이 지워지도록 추가 */
+                                    this.setState({
+                                        message : ''
+                                    })
                                 }
                             
                             }
-                        >
+                            >
+                            {/*{this.state.message}로 하면 같이 값이 실시간으로 변경된다. 
+                                onChange로 message로 변경되니까 랜더링될때 계속 바뀐다. */}
                             확인
                         </button>
                     </>
