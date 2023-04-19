@@ -27,7 +27,7 @@
             constructor(props) {
                 
                 super(props);
-
+                console.log ('constructor');
                 this.state = { now : new Date().toLocaleTimeString() } ;
             }
 
@@ -102,7 +102,7 @@
             /* 5. 컴포넌트 업데이트 작업이 끝난 후 호출하는 메소드 */
             componentDidUpdate(prevProps, prevState, snapshot){
 
-                /* 리렌더링을 완효한 후 실행한다.
+                /* 리렌더링을 완료한 후 실행한다.
                 업데이트가 끝난 직후이므로 DOM 관련 처리를 해도 되며, 
                 이전과 현재 props를 비교하여 네트워크 요청을 보내는 작업등도 가능하다. 
                 */
