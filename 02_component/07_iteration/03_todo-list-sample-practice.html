@@ -124,7 +124,14 @@
                 /* 코드 작성 */
                 const changedTodoList = todos.map( 
                     item => {
-                            
+                            /* totos의 id는 int이지만 e.target.id는 데이터로 String 타입이다. 
+                                타입이 서로 달라 === 는 false만 되기 때문에 String을 
+                                parseInt를 처리 (=== 타입까지 다 같은지 확인)*/
+                            // if(item.id === parseInt(e.target.id)){
+                            //     item.isDone = e.target.checked;
+                            // }    
+                            /* == 타입제외 값이 같은지만 확인 
+                            check 박스의 value는 따로 명시하지 않으면 on 이라는 값이다 */
                             if(item.id == e.target.id){
                                 item.isDone = !item.isDone;
                             }
