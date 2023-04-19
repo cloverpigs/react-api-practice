@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>01_useEffect-basic</title>
+
+    <!-- 리액트 공식 사이트의 문서에 웹 사이트 React 추가하기 메뉴의 cdn을 복사해서 넣어준다. -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel 추가-->
+    <script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
+      
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        /* Hooks는 리액트 16.8에서 새로 도입된 기능으로,
+        함수 컴포넌트에서 사용 불가능한 생명주기 메소드의 한계점으로 인해
+        상태 관리 및 랜더링 이후 시점 컨트롤 등 다양한 문제를 해결하기 위해 만든
+        함수 집합을 의미한다. 
+        
+        그 중 usestate는 가장 기본적인 hook이며, 함수 컴포넌트에서도 상태를 관리할
+        수 있게 해준다. 이 부분은 이미 다루었으므로 생략한다.
+
+        클래스형 컴포넌트에서는 컴포넌트 랜더링 후 특정 작업 수행시 
+        componentDidMount 혹은 componentDidUpdate 메소드를 사용하면 된다.
+        함수형 컴포넌트에서는 생명주기 api 사용이 불가능하므로 제공 되는 hook인
+        useeffect를 활용한다.
+        
+        */
+        /* React 객체에서 구조분해할당을 하여 useEffect만 가지고 와서 React.useEffect 대신
+        useEffect로 사용할 수 있도록 하였다. */
+        const { useEffect } = React;
+        
+        function MessagePrinter(props) {
+
+            console.log('랜더링...');
+
+            /* useEffect()의 매개 변수로 함수를 전달하여 랜더링 이후 동작구문을 처리한다. 
+            renturn 구문 보다 늦게 작동하지만, return구문은 함수의 마지막에 작성하기 때문에 
+            위치만 return구문 위에 작성하였다, 하지만 구동은 return보다 늦게 된다.*/
+            useEffect( () => { 
+                console.log('랜더링 이후 동작 ...');
+            });
+
+            return (
+                <h1>{ console.log('랜더링 시 출력') }{ props.message } </h1>
+            );
+
+            /* 이 위치에서 무언가 동작하게 하고 싶어도 작성할 수 없다. 
+            render 이후 실행하고 싶은 동작을 useEffect를 통해 처리할 수 있다. */
+        }
+        const message = "안녕하세요";
+
+
+        ReactDOM.createRoot(document.getElementById('root')).render(
+            <MessagePrinter message={ message }/>);
+    </script>
+    
+</body>
+</html>
