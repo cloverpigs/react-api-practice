@@ -102,11 +102,13 @@
         function TodoItems({ todos, setTodos }) {
 
             const removeTodo = (id) => {
+                /* 코드 작성 */
                 const changedTodoitems = todos.filter(item => item.id !== id);
                 setTodos(changedTodoitems);
             }
 
             // const onChangeHandler = (e) => {
+                  /* 코드 작성 */
             //     const [ ...form] = todos;
             //     const [ {id, description, isDone} ] = todos.filter(item => item.id == e.target.id);
                 
@@ -119,6 +121,7 @@
             //     setTodos(form);
             // }
             const onChangeHandler = (e) => {
+                /* 코드 작성 */
                 const changedTodoList = todos.map( 
                     item => {
                             
@@ -165,10 +168,12 @@
             const [nextId, setNextId] = useState(2);
 
             const onChangeHandler = (e) => {
+                /* 코드 작성 */
                 setInputText(e.target.value);
             }
 
             const onClickHandler = () => {
+                /* 코드 작성 */
                 const changedTodoList = {
                     id : nextId,
                     description : inputText,
