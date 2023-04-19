@@ -21,25 +21,36 @@
 
         /* 리듀서를 활용해 input 입력 값 상태 관리 */
 
-        const { useRecuder } = React;
+        const { useReducer } = React;
 
-        function reducer(){}
+        function reducer(state, action){
+            
+            return {
+                ...state,
+                [action.name] : action.value
+            };
+        }
 
         function RegistForm(){
             
-            const { state, dispatch } =  useRecuder( reducer, {
+            const [ state, dispatch ] =  useReducer( reducer, {
                 name : '',
                 nickname : ''
             });
 
+            const { name, nickname } = state;
+            
+            /* change 이벤트가 발생하면 reducer로 이벤트 발생 객체를 전달 한다.*/
+            const onChangeHanlder = (e) => dispatch(e.target);
+
             return (
                 <>
                     <label>이름 : </label>
-                    <input type="text" name="name"/><br/>
+                    <input type="text" name="name" value={name} onChange={onChangeHanlder}/><br/>
                     <label>닉네임 : </label>
-                    <input type="text" name="nickname"/><br/>
-                    <h3>입력한 이름 : </h3>
-                    <h3>입력한 닉네임 : </h3>
+                    <input type="text" name="nickname" value={nickname} onChange={onChangeHanlder}/><br/>
+                    <h3>입력한 이름 : {name}</h3>
+                    <h3>입력한 닉네임 : {nickname}</h3>
                 </>
             );
         }
