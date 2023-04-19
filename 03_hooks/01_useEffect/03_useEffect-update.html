@@ -40,12 +40,12 @@
             /* 배열의 변수를 넣으면 그 변수가 변경 될때 useEffect함수가 동작한다.*/
             useEffect(
                 () => { console.log('username update...')},
-                [user.username]
+                [user.username] // username의 값이 변경 되면 해당 함수가 실행된다.
             );
 
             useEffect(
                 () => { console.log('password update...')},
-                [user.password]
+                [user.password] // password의 값이 변경 되면 해당 함수가 실행 된다.
             );
 
             return (
