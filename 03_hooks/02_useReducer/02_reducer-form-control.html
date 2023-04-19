@@ -5,6 +5,13 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>02_reducer-form-control</title>
+
+    <!-- 리액트 공식 사이트의 문서에 웹 사이트 React 추가하기 메뉴의 cdn을 복사해서 넣어준다. -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel 추가-->
+    <script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
+
 </head>
 <body>
     
@@ -14,12 +21,17 @@
 
         /* 리듀서를 활용해 input 입력 값 상태 관리 */
 
-        const { userRecuder } = React;
+        const { useRecuder } = React;
 
         function reducer(){}
 
         function RegistForm(){
             
+            const { state, dispatch } =  useRecuder( reducer, {
+                name : '',
+                nickname : ''
+            });
+
             return (
                 <>
                     <label>이름 : </label>
