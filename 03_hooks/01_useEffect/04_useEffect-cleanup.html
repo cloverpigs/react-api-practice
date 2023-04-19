@@ -30,12 +30,30 @@
 
         function Counter() {
 
-            
+            const [ count, setCount ] = useState(0);
+
+            useEffect(
+                () => { console.log('useEffect 동작...');
+
+                    /* 정리 함수를 반환한다.
+                    useEffect의 함수의 리턴값으로 함수를 전달하면 
+                    clean-up 기능을 수행하여 , 업데이트 되기전 먼저 실행 된 다음
+                    useEffect가 동작한다.*/
+                    return () => {
+                        console.log('clean-up...');
+                    }
+                }                
+                
+            );
 
             return(
                 <>
-                    <h1>count : </h1>
-                    <button>+ 1</button>
+                    <h1>count : { count }</h1>
+                    <button 
+                        onClick={ () => setCount( count + 1) }
+                    >
+                        + 1
+                    </button>
                 </>
             )
         }
