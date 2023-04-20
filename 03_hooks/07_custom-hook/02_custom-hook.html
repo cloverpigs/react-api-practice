@@ -48,7 +48,7 @@
             const email = useInput();
 
             console.log(username);
-            console.log(password);
+            console.log({...password}); // value : value onChange : onChange 로 나뉘지만,풀어쓰는곳에 따라 : 가 = 이 된다.
             console.log(email);
         
             return (
