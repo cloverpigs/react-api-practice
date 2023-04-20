@@ -23,14 +23,14 @@
 
         const { useState } = React;
 
-        function Emojis({ url }){
+        // function Emojis({ url }){
 
-            return (
-                <div>
-                    <img src={url}/>
-                </div>
-            )
-        }
+        //     return (
+        //         <div>
+        //             <img src={url}/>
+        //         </div>
+        //     )
+        // }
 
         function App () {
 
@@ -67,6 +67,7 @@
                     <button onClick={ onClickHandler }> 검색 </button>
                     <br/>
                     <img src={url}/>
+                    {/* <Emojis url={url}/>*/}
                     
                 </>
             );
