@@ -36,29 +36,32 @@
 
         const { useState, useEffect } = React;
 
-        function Card( { infoUrl }) {
+        function Card( { pokemon }) {
             /* 한 포켓몬의 이미지 주소 요청 => 이전 api 요청의 결과에 url 속성으로 존재
             목록 api에 해당 포켓몬의 정보가 있는 url를 가져와서 처리해야함
+            Ex. https://pokeapi.co/api/v2/pokemon/1/
             결과에서 sprites.back-default 속성을 이용해서 img 설정
             */
             
-            console.log(infoUrl.name);
+            /* 슬래쉬 뒤에 숫자가 1개 이상인 url를 찾는다.*/
+            const regExp= /\/[0-9]{1,}/;
+            const [ data, setData ] = useState();
 
-            // useEffect( 
-            //     ()=> {
-            //         fetch(url)
-            //             .then(response => response.json())
-            //             .then(list => console.log(list.results));
-            //     }
-            //     ,[]
-            // );
+            useEffect( 
+                ()=> {
+                    fetch(pokemon.url)
+                        .then(response => response.json())
+                        .then(json=> setData(json));
+                }
+                ,[]
+            );
             
             return (
                 <div className="card">
-                    <img src=""/>
+                    {data && <img src={data.sprites.front_default}/>}
                     <div className="info">
-                        <h2>No. d</h2>
-                        <h3>name : d</h3>
+                        <h2>No. { pokemon.url.match(regExp).toString().replace('/', '')}</h2>
+                        <h3>name : {pokemon.name}</h3>
                     </div>
                 </div>
             );
@@ -74,22 +77,22 @@
                 limit : ''
             });
 
-            const [ infoUrl, setInfoUrl ] = useState([]);
+            const [ pokemons, setPokemons ] = useState([]);
             
             useEffect( 
                 ()=> {
-                    fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=40')
+                    fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
                         .then(response => response.json())
-                        .then(list => setInfoUrl(list.results));
+                        .then(list => setPokemons(list.results));
                 }
                 ,[]
             );
-            console.log(infoUrl);
            
+            console.log(pokemons);
+               
             return (
                 <div>
-                    
-                    {infoUrl && infoUrl.map( info => <Card infoUrl={ infoUrl } key={infoUrl.name}/>)}   
+                    { pokemons && pokemons.map( pokemon => <Card pokemon={ pokemon } key={pokemon.name}/>)}
                 </div>
             );
         }
@@ -104,7 +107,6 @@
             return (
                 <>
                     <Title/>
-                    
                     <PokemonList/>
                 </>
             );
