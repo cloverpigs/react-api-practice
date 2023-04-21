@@ -67,6 +67,8 @@
             );
         }
 
+        
+
         function PokemonList() {
 
             /* 전체 포켓몬 목록에 대한 api 요청
@@ -79,19 +81,45 @@
 
             const [ pokemons, setPokemons ] = useState([]);
             
+            const [ offset, setOffset ] = useState();
+            const [ limit, setLimit ] = useState();
+            const onChangeOffset = (e) => setOffset(e.target.value);
+            const onChangeLimit = (e) => setLimit(e.target.value);
+            
+            
+
+            const onClickHandler = () => {
+                setPage(
+                    {
+                        ...page,
+                        [e.target.name] : e.target.value
+                    }
+                );
+            }
+            
+
             useEffect( 
                 ()=> {
-                    fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
+                    fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}}`)
                         .then(response => response.json())
                         .then(list => setPokemons(list.results));
                 }
                 ,[]
             );
+            
            
-            console.log(pokemons);
                
             return (
                 <div>
+                    <div>
+                    <label>시작 포켓몬 번호 : </label>
+                    <input type="number" name="offset" min='0' max='1281'
+                        value={offset} onChange={ onChangeOffset }/>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <label>보여줄 포켓몬 수 : </label>
+                    <input type="number" name="limit" min='0' max='1281'
+                    value={limit} onChange={ onChangeLimit }/>&nbsp;&nbsp;&nbsp;
+                    <button>검색</button>
+                    </div>
                     { pokemons && pokemons.map( pokemon => <Card pokemon={ pokemon } key={pokemon.name}/>)}
                 </div>
             );
