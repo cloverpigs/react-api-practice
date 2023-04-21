@@ -86,25 +86,20 @@
             const onChangeOffset = (e) => setOffset(e.target.value);
             const onChangeLimit = (e) => setLimit(e.target.value);
             
-            
+            const [ search, setSearch ] = useState(false);
 
             const onClickHandler = () => {
-                setPage(
-                    {
-                        ...page,
-                        [e.target.name] : e.target.value
-                    }
-                );
+                setSearch(!search);
             }
-            
+            console.log(search);
 
             useEffect( 
                 ()=> {
-                    fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset}&limit=${limit}}`)
+                    fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset-1}&limit=${limit}}`)
                         .then(response => response.json())
                         .then(list => setPokemons(list.results));
                 }
-                ,[]
+                ,[search]
             );
             
            
@@ -113,12 +108,12 @@
                 <div>
                     <div>
                     <label>시작 포켓몬 번호 : </label>
-                    <input type="number" name="offset" min='0' max='1281'
+                    <input type="number" name="offset" min='1' max='1281'
                         value={offset} onChange={ onChangeOffset }/>&nbsp;&nbsp;&nbsp;&nbsp;
                     <label>보여줄 포켓몬 수 : </label>
                     <input type="number" name="limit" min='0' max='1281'
                     value={limit} onChange={ onChangeLimit }/>&nbsp;&nbsp;&nbsp;
-                    <button>검색</button>
+                    <button onClick={onClickHandler} >검색</button>
                     </div>
                     { pokemons && pokemons.map( pokemon => <Card pokemon={ pokemon } key={pokemon.name}/>)}
                 </div>
