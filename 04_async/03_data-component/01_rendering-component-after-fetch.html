@@ -11,7 +11,8 @@
     <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
     <!-- babel 추가-->
     <script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
-    <style>
+   
+   <style>
         .item {
             background-color: powderblue;
             border : 1px dotted black;
@@ -20,6 +21,7 @@
             margin : 10px;
         }
     </style>
+    
 </head>
 <body>
 
@@ -34,9 +36,23 @@
 
         }
         function Item({ user }) {
+
+
+            const onClickHandler = (id) => {
+                console.log(`클릭 된 user의 id : ${id}`)
+            };
+
+
             return(
-                <div className="item">
-                        <h4>{ user.name } ({ user.username })</h4>
+                <div className="item" onClick={ () => onClickHandler(user.id) }>
+                    <h4>{ user.name } ({ user.username })</h4>
+                    <p>
+                        userId : { user.id } <br/>
+                        email : { user.email } <br/>
+                        phone : { user.phone } <br/>
+                        company name : { user.company.name } <br/>
+                    </p>    
+                    
                 </div>
             );
         }
