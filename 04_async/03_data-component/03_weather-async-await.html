@@ -76,6 +76,24 @@
                 }
                 ,[]
             );
+            /* 콘솔창에 error가 생기지만 동작하는데는 문제 없다. async를 useEffect에서 바로 사용하면 안된다고 한다.*/
+            // useEffect(
+            //     async () => {
+            //         /* 위치 정보에 대한 조회가 완료 된 이후 날씨 정보 api로 요청이 되어야 하므로 
+            //         두 가지 비동기 요청에 대한 순서를 반드시 정해서 수행해야만 한다. */
+                    
+            //             const coords = await getPosition();
+            //             const result = await getWeather(coords);
+            //             console.log(result);
+            //             setCityname(result.name);
+            //             setWeather(result.weather[0]);
+            //             setWind(result.wind);
+                    
+                    
+            //     }
+            //     ,[]
+            // );
+
             
             return (
                 <>
