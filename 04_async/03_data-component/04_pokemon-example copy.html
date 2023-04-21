@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>04_pokemon-example</title>
+
+    <!-- 리액트 공식 사이트의 문서에 웹 사이트 React 추가하기 메뉴의 cdn을 복사해서 넣어준다. -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <!-- babel 추가-->
+    <script src='https://unpkg.com/@babel/standalone/babel.min.js'></script>
+    <style>
+        .card {
+            border: 1px solid black;
+            width: 300px;
+            margin: 10px;
+            padding: 20px;
+            display: inline-block;
+        }
+        .card>* {
+            display: inline-block;
+        }
+        .card>img {
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+
+</head>
+<body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+
+        const { useState, useEffect } = React;
+
+        function Card( { pokemon }) {
+            /* 한 포켓몬의 이미지 주소 요청 => 이전 api 요청의 결과에 url 속성으로 존재
+            목록 api에 해당 포켓몬의 정보가 있는 url를 가져와서 처리해야함
+            Ex. https://pokeapi.co/api/v2/pokemon/1/
+            결과에서 sprites.back-default 속성을 이용해서 img 설정
+            */
+            
+            /* 슬래쉬 뒤에 숫자가 1개 이상인 url를 찾는다.*/
+            const regExp= /\/[0-9]{1,}/;
+            const [ data, setData ] = useState();
+
+            useEffect( 
+                ()=> {
+                    fetch(pokemon.url)
+                        .then(response => response.json())
+                        .then(json=> setData(json));
+                }
+                ,[]
+            );
+            
+            return (
+                <div className="card">
+                    {data && <img src={data.sprites.back_default}/>}
+                    <div className="info">
+                        <h2>No. { pokemon.url.match(regExp).toString().replace('/', '')}</h2>
+                        <h3>name : {pokemon.name}</h3>
+                    </div>
+                </div>
+            );
+        }
+
+        function PokemonList() {
+
+            /* 전체 포켓몬 목록에 대한 api 요청
+            https://pokeapi.co/api/v2/pokemon?offset={}&limit={}*/
+
+            const [ page, setPage ] = useState({
+                offest : '',
+                limit : ''
+            });
+
+            const [ pokemons, setPokemons ] = useState([]);
+            
+            useEffect( 
+                ()=> {
+                    fetch('https://pokeapi.co/api/v2/pokemon?offset=0&limit=20')
+                        .then(response => response.json())
+                        .then(list => setPokemons(list.results));
+                }
+                ,[]
+            );
+           
+            console.log(pokemons);
+               
+            return (
+                <div>
+                    { pokemons && pokemons.map( pokemon => <Card pokemon={ pokemon } key={pokemon.name}/>)}
+                </div>
+            );
+        }
+
+        function Title() {
+        
+            return <h1 align='center'>포켓몬 목록</h1>
+        }
+
+        function App() {
+        
+            return (
+                <>
+                    <Title/>
+                    <PokemonList/>
+                </>
+            );
+        }
+
+        ReactDOM.createRoot(document.getElementById('root')).render(<App/>);
+    </script>
+
+</body>
+</html>
