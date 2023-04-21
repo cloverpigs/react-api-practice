@@ -34,7 +34,7 @@
 
     <script type="text/babel">
 
-        const { useState, useEffect } = React;
+        const { useState, useEffect, useCallback, useMemo } = React;
 
         function Card( { pokemon }) {
             /* 한 포켓몬의 이미지 주소 요청 => 이전 api 요청의 결과에 url 속성으로 존재
@@ -67,6 +67,19 @@
             );
         }
 
+        function pageInfo () {
+            const [ value, setValue ] = useState(1);
+            const onChange =  (e) => {
+                
+                if(parseInt(e.target.value) > parseInt(e.target.max)){
+                    setValue(e.target.max);
+                } else {
+                    setValue(e.target.value);
+                }
+            };
+            
+            return{ value, onChange};
+        }
         
 
         function PokemonList() {
@@ -74,44 +87,46 @@
             /* 전체 포켓몬 목록에 대한 api 요청
             https://pokeapi.co/api/v2/pokemon?offset={}&limit={}*/
 
-            const [ page, setPage ] = useState({
-                offest : '',
-                limit : ''
-            });
+            
+            
 
             const [ pokemons, setPokemons ] = useState([]);
             
-            const [ offset, setOffset ] = useState("");
-            const [ limit, setLimit ] = useState("");
-            const onChangeOffset = (e) => setOffset(e.target.value);
-            const onChangeLimit = (e) => setLimit(e.target.value);
+            // const [ offset, setOffset ] = useState("");
+            // const [ limit, setLimit ] = useState("");
+            // const onChangeOffset = (e) => setOffset(e.target.value);
+            // const onChangeLimit = (e) => setLimit(e.target.value);
+
+            const offset = pageInfo();
+            const limit = pageInfo();
+                
             
             const [ search, setSearch ] = useState(false);
 
             const onClickHandler = () => {
                 setSearch(!search);
             }
+        
+            
 
             useEffect( 
                 ()=> {
-                    fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset-1}&limit=${limit}}`)
+                    fetch(`https://pokeapi.co/api/v2/pokemon?offset=${offset.value-1}&limit=${limit.value}}`)
                         .then(response => response.json())
                         .then(list => setPokemons(list.results));
                 }
                 ,[search]
             );
-            
-           
-               
+
             return (
-                <div>
-                    <div>
+                <div align='center'>
+                    <div >
                     <label>시작 포켓몬 번호 : </label>
                     <input type="number" name="offset" min='1' max='1281'
-                        value={offset} onChange={ onChangeOffset }/>&nbsp;&nbsp;&nbsp;&nbsp;
+                        {...offset} />&nbsp;&nbsp;&nbsp;&nbsp;
                     <label>보여줄 포켓몬 수 : </label>
-                    <input type="number" name="limit" min='0' max='1281'
-                    value={limit} onChange={ onChangeLimit }/>&nbsp;&nbsp;&nbsp;
+                    <input type="number" name="limit" min='1' max='1281'
+                    {...limit} />&nbsp;&nbsp;&nbsp;
                     <button onClick={onClickHandler} >검색</button>
                     </div>
                     { pokemons && pokemons.map( pokemon => <Card pokemon={ pokemon } key={pokemon.name}/>)}
