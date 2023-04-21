@@ -81,8 +81,8 @@
 
             const [ pokemons, setPokemons ] = useState([]);
             
-            const [ offset, setOffset ] = useState();
-            const [ limit, setLimit ] = useState();
+            const [ offset, setOffset ] = useState("");
+            const [ limit, setLimit ] = useState("");
             const onChangeOffset = (e) => setOffset(e.target.value);
             const onChangeLimit = (e) => setLimit(e.target.value);
             
@@ -91,7 +91,6 @@
             const onClickHandler = () => {
                 setSearch(!search);
             }
-            console.log(search);
 
             useEffect( 
                 ()=> {
