@@ -3,6 +3,7 @@ import './App.css';
 import Layout from './layouts/Layout';
 import Main from './pages/Main';
 import MovieList from './pages/MovieList';
+import MovieDetail from './pages/MovieDetail';
 
 
 function App() {
@@ -14,6 +15,7 @@ function App() {
           <Route index element={<Main/>}/>
           <Route path="movie">
             <Route index element={<MovieList/>}/>
+            <Route path=':movieCd' element={<MovieDetail/>}/>
           </Route>
         </Route>
       </Routes>

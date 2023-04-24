@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { getMovieList } from "../api/MovieAPI";
+import MovieItem from "../components/MovieItem";
 
 function MovieList () {
 
@@ -14,10 +15,10 @@ function MovieList () {
     );
 
     console.log(movieList);
-    
+
     return (
         <div className="content-row">
-            영화 목록
+            { movieList && movieList.map(movie => <MovieItem key={ movie.movieCd} movie={ movie }/>)}
         </div>
     );
 }

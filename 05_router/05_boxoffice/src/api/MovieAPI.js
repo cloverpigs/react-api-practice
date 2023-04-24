@@ -27,3 +27,15 @@ export async function getMovieList(){
     return data.boxOfficeResult.dailyBoxOfficeList;
 
 }
+
+/* */
+export async function getMovieDetail(movieCd) {
+
+    const url =`http://www.kobis.or.kr/kobisopenapi/webservice/rest/movie/`+
+    `searchMovieInfo.json?key=${API_KEY}&movieCd=${ movieCd }`;
+
+    const response = await fetch(url);
+    const data = await response.json();
+
+    return data.movieInfoResult.movieInfo;
+}
