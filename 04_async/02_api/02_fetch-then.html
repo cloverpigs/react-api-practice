@@ -21,8 +21,8 @@
         function callAPI() {
             
             fetch('https://jsonplaceholder.typicode.com/users')
-                .then(response => response.json()) //fetch로 반환 받은 response객체를 json으로 변환
-                .then(data => console.log(data)); //json으로 변경한 response객체를 화살표함수로 표현하여 출력
+                .then(response => response.json()) //fetch로 반환 받은 promise객체를 화살표 함수로 json으로 변환
+                .then(data => console.log(data)); //json으로 변경한 promise객체를 화살표함수로 표현하여 출력
            
 
         }
