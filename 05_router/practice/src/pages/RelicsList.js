@@ -12,7 +12,7 @@ function RelicsList (){
         []
     );
         
-    console.log(RelicsList);
+    console.log(RelicsList&&RelicsList.body);
 
     return (
         <>
