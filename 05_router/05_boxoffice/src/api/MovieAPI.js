@@ -6,7 +6,9 @@ const getDateFormat= () => {
     
     const today = new Date();
 
-    return `${today.getFullYear()}${today.getMonth()<10 ? '0'+(today.getMonth()+1):(today.getMonth()+1)}${today.getDate()-1}`;
+    return `${today.getFullYear()}`+
+        `${today.getMonth()<10 ? '0'+(today.getMonth()+1) : (today.getMonth()+1)}`+
+        `${today.getDate()-1}`;
     
 }
 
