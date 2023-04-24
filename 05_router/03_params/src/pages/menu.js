@@ -1,6 +1,7 @@
 import{ useState, useEffect } from 'react';
 import { getMenuList } from '../api/MenuAPI';
-import MenuItem from '../components/MenuItem'; 
+import MenuItem from '../components/MenuItem';
+import boxStyle from './Menu.module.css';
 
 function Menu() {
 
@@ -20,7 +21,7 @@ function Menu() {
         <div>
             <h1>메뉴 목록</h1>
 
-            <div>
+            <div className={ boxStyle.MenuBox }>
                 { menuList && menuList.map(menu => < MenuItem key={ menu.menuCode } menu={ menu } />)}
             </div>
         </div>  
