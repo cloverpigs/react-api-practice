@@ -33,7 +33,7 @@ function MovieDetail() {
                         return (
                             <Link to={`/company/${company.companyCd}`}>
                             <div>
-                                <span> {company.companyPartNm}</span> &nbsp;
+                                <span> {company.companyPartNm}</span>&nbsp;
                                 <span className="actor">{company.companyNm}</span>
                                
                             </div>
