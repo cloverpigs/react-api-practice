@@ -4,6 +4,7 @@ import Main from './pages/main';
 import About from './pages/About';
 import Menu from './pages/menu';
 import MenuDetails from './pages/MenuDetails';
+import MenuSearchResult from './pages/MenuSearchResult';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
             <Route path="menu">
               <Route index element={ <Menu/> }></Route>
               <Route path=":menuCode" element={<MenuDetails/>}></Route>
+              <Route path="search" element={<MenuSearchResult/>}></Route>
             </Route>
 
           </Route>

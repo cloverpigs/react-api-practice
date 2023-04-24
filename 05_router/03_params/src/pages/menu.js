@@ -2,11 +2,14 @@ import{ useState, useEffect } from 'react';
 import { getMenuList } from '../api/MenuAPI';
 import MenuItem from '../components/MenuItem';
 import boxStyle from './Menu.module.css';
+import { useNavigate } from 'react-router-dom';
 
 function Menu() {
 
     const [ menuList, setMenuList ] = useState();
     const [ searchValue, setSearchValue ] = useState('');
+
+    const navigate = useNavigate();
 
     useEffect(
         ()=> {
@@ -17,7 +20,9 @@ function Menu() {
     );
     
     const onClickHandler = () => {
-
+        /* react-router-dom 의 useNavigate hook을 이용하여 링크를 이동시킨다. 
+        인자로 전달 되는 값으로 url주소가 변경된다. (풀네임사용)*/
+        navigate(`/menu/search?menuName=${ searchValue }`);
     }
 
 

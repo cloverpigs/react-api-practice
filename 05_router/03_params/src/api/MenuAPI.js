@@ -16,3 +16,9 @@ export function getMenuDetail( menuCode ) {
     return menus.filter( menu => menu.menuCode === parseInt(menuCode))[0];
 }
 
+/* 메뉴명 전달 받아 메뉴 이름을 포함하고 있는 메뉴 목록 조회 
+match 함수 : 전달 되는 인자(문자열)가 해당 문자열에 포함되어 있는지 확인하는 메소드 */
+export function getSearchMenu( menuName ) {
+
+    return  menus.filter( menu => menu.menuName.match(menuName));
+}
