@@ -15,3 +15,4 @@ export function getMenuDetail( menuCode ) {
     리턴 시킨다. ( filter로 1개만 나오도록 하여 0번 인덱스로 설정하였다. */
     return menus.filter( menu => menu.menuCode === parseInt(menuCode))[0];
 }
+
